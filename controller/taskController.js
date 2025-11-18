@@ -63,7 +63,8 @@ exports.filterByDate = async (req, res) => {
   end.setHours(23, 59, 59, 999);
 
   const tasks = await Task.find({
-    dueDate: { $gte: start, $lte: end }
+    createdAt: { $gte: start, $lte: end }
+
   });
 
   res.json(tasks);
