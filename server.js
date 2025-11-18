@@ -1,13 +1,17 @@
 require('dotenv').config();
 const express = require ('express');
 const connectDB=require('./config/db');
+const taskRoutes=require('./routes/taskRoute');
 
 const app = express();
 app.use(express.json());
+app.use('/api/task',taskRoutes);
+ 
 
 app.get('./',(req,res)=>{
     res.json({message:"Todo API runnin"});
 });
+
 
 const PORT = process.env.PORT || 5000;
 
