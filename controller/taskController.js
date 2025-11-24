@@ -3,13 +3,17 @@ const Task = require("../models/taskModel");
 // CREATE
 exports.createTask = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description,priority } = req.body;
 
     if (!title) {
       return res.status(400).json({ error: "Title is required" });
     }
+     const allowedPriorities = ["High", "Medium", "Low"];
+    if (priority && !allowedPriorities.includes(priority)) {
+      return res.status(400).json({ error: "Invalid priority value" });
+    }
 
-    const task = await Task.create({ title, description });
+    const task = await Task.create({ title, description ,priority});
     res.status(201).json(task);
 
   } catch (err) {
